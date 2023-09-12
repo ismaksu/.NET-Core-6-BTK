@@ -7,7 +7,8 @@ namespace NetCoreMVCBTk.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            var model = Repository.Applications;
+            return View(model);
         }
 
         public IActionResult Apply()
@@ -17,8 +18,18 @@ namespace NetCoreMVCBTk.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Apply(Candidate cdt)
+        public IActionResult Apply([FromForm] Candidate cdt)
         {
+            if (Repository.Applications.Any(c => c.Email.Equals(cdt.Email)))
+            {
+                ModelState.AddModelError("", "The mail address you entered already registered.");
+            }
+
+            if (ModelState.IsValid)
+            {
+                Repository.Add(cdt);
+                return View("Feedback", cdt);
+            }
             return View();
         }
     }

@@ -4,6 +4,7 @@
 </div>
 
 <form method="post" asp-action="Apply" class="m-2">
+    <div class="text-danger" asp-validation-summary="All"></div>
     <div class="form-group">
         <label asp-for="Email" class="h5"></label>
         <input asp-for="Email" class="form-control mb-3"/>
@@ -31,7 +32,7 @@
     <fieldset>
         <legend>Select A Course</legend>
         <p>
-            <input id="mvc" type="radio" name="SelectedCourse" value="ASP.NET Core MVC" />
+            <input checked id="mvc" type="radio" name="SelectedCourse" value="ASP.NET Core MVC" />
             <label>ASP.NET Core MVC</label>
         </p>
         <p>
